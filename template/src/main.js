@@ -34,7 +34,6 @@ if (process.env.NODE_ENV !== 'production') {
   console.log('Vux中的Vue.http依赖于axios')
 } else {
   /* 生产环境 */
-  
   /* 去除移动端点击300ms延迟 */
   const FastClick = require('fastclick')
   FastClick.attach(document.body)
