@@ -5,10 +5,11 @@
 </template>
 
 <script>
-  import './styles/App.scss'
-  export default {
-    name: 'App'
-  }
+import './styles/App.scss'
+
+export default {
+  name: 'App'
+}
 </script>
 
 <style scoped lang="scss">
