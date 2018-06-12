@@ -8,6 +8,7 @@ let toastDelay = 3000
 
 export const wisToast = (text, type = 'success', position = 'default') => {
   Vue.$vux.toast.show({
+    width: '50vw',
     text,
     type,
     time: toastDelay,
@@ -40,8 +41,9 @@ const wisLoading = (flag, immediately = false) => {
 const dealResponse = (res) => {
   if (res.status !== 200) {
     wisLoading(false, true)
-    wisToast('请求错误，状态：' + res.status, 'text')
-    return {}
+    let errorMessage = '请求错误，状态：' + res.status
+    wisToast(errorMessage, 'text')
+    throw new Error(errorMessage)
   } else {
     if (res.data) {
       if (+res.data.status === 0) {
@@ -51,8 +53,9 @@ const dealResponse = (res) => {
         window.location.href = window.HOST + '/app/visitor/' + window.corpId + '/dispatch?redirectUrl=' + encodeURIComponent(window.location.href)
       } else {
         wisLoading(false, true)
-        wisToast('请求接口错误：' + (res.data.message || '无错误信息'), 'text')
-        return {}
+        let errorMessage = '请求接口错误：' + (res.data.message || '无错误信息')
+        wisToast(errorMessage, 'text')
+        throw new Error(errorMessage)
       }
     } else {
       wisLoading(false, true)
@@ -87,21 +90,23 @@ export const request = (config = {}, options = {}) => {
   } else {
     requestUrl = url
   }
-  wisLoading(true)
-  return Vue.http({
+  let requestOption = {
     url: requestUrl,
     method: method,
-    data: useUrlencode ? urlencode.stringify(data) : data,
-    headers: {
-      'Content-Type': useUrlencode ? 'application/x-www-form-urlencoded' : 'application/json'
-    },
     ...options
-  })
+  }
+  if (new RegExp(/GET/ig).test(method)) {
+    requestOption.params = data
+  } else {
+    requestOption.data = useUrlencode ? urlencode.stringify(data) : data
+    requestOption.headers = {
+      'Content-Type': useUrlencode ? 'application/x-www-form-urlencoded' : 'application/json'
+    }
+  }
+  wisLoading(true)
+  return Vue.http(requestOption)
     .then(res => {
       wisLoading(false)
       return dealResponse(res)
-    })
-    .catch(e => {
-      console.log(e)
     })
 }
