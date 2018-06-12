@@ -40,7 +40,7 @@ const wisLoading = (flag, immediately = false) => {
 const dealResponse = (res) => {
   if (res.status !== 200) {
     wisLoading(false, true)
-    wisToast('请求错误，状态：' + res.status)
+    wisToast('请求错误，状态：' + res.status, 'text')
     return {}
   } else {
     if (res.data) {
@@ -51,7 +51,7 @@ const dealResponse = (res) => {
         window.location.href = window.HOST + '/app/visitor/' + window.corpId + '/dispatch?redirectUrl=' + encodeURIComponent(window.location.href)
       } else {
         wisLoading(false, true)
-        wisToast('请求接口错误：' + (res.data.message || '无错误信息'))
+        wisToast('请求接口错误：' + (res.data.message || '无错误信息'), 'text')
         return {}
       }
     } else {
