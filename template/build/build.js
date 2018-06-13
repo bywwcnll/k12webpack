@@ -14,7 +14,7 @@ const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 
 const getZip = () => {
-  var array = fs.readdirSync(path.resolve('./')).filter(el => /^\d+-\d+-\d+ \d+:\d+:\d+.zip$/.test(el))
+  var array = fs.readdirSync(path.resolve('./')).filter(el => /^\d+-\d+-\d+_\d+-\d+-\d+.zip$/.test(el))
   return array && array[0] ? array[0] : ''
 }
 const pv = (v) => v < 10 ? '0' + v : v
@@ -54,7 +54,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     var hour = date.getHours();
     var minute = date.getMinutes();
     var second = date.getSeconds();
-    var newZipFileName = `${year}-${pv(month)}-${pv(day)} ${pv(hour)}:${pv(minute)}:${pv(second)}.zip`
+    var newZipFileName = `${year}-${pv(month)}-${pv(day)}_${pv(hour)}-${pv(minute)}-${pv(second)}.zip`
     
     try {
       var zipoutput = fs.createWriteStream(path.resolve(newZipFileName))
