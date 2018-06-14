@@ -7,6 +7,8 @@
 <script>
 export default {
   props: [],
+  created () {},
+  mounted () {},
   data () {
     return {}
   },
