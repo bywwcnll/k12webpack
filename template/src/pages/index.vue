@@ -13,14 +13,13 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { XHeader, Cell, Group } from 'k12vux'
-import { wisToast } from '../utils/util'
 
 export default {
   components: {
     XHeader, Cell, Group
   },
   async created () {
-    wisToast('O(∩_∩)O')
+    this.$wisToast('O(∩_∩)O')
   },
   async mounted () {
 

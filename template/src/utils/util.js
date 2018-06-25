@@ -6,16 +6,6 @@ let loadingTimer = null
 let loadingDelay = 800
 let toastDelay = 3000
 
-export const wisToast = (text, type = 'success', position = 'default') => {
-  Vue.$vux.toast.show({
-    width: '50vw',
-    text,
-    type,
-    time: toastDelay,
-    position
-  })
-}
-
 const wisLoading = (flag, immediately = false) => {
   if (flag) {
     if (loadingTimer) clearTimeout(loadingTimer)
@@ -109,4 +99,15 @@ export const request = (config = {}, options = {}) => {
       wisLoading(false)
       return dealResponse(res)
     })
+}
+
+export const wisToast = (text, type = 'success', position = 'default') => {
+  wisLoading(false, true)
+  Vue.$vux.toast.show({
+    width: '50vw',
+    text,
+    type,
+    time: toastDelay,
+    position
+  })
 }

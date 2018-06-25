@@ -6,12 +6,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './vuex/store'
+import { wisToast } from './utils/util'
 import { AjaxPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, ToastPlugin } from 'k12vux'
 Vue.use(AjaxPlugin)
 Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(ToastPlugin)
+Vue.prototype.$wisToast = wisToast
 
 Vue.config.productionTip = false
 
