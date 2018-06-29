@@ -104,7 +104,6 @@ export const request = (config = {}, options = {}) => {
 export const wisToast = (text, type = 'success', position = 'default') => {
   wisLoading(false, true)
   Vue.$vux.toast.show({
-    width: '50vw',
     text,
     type,
     time: toastDelay,
