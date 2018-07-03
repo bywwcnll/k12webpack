@@ -11,7 +11,7 @@ const wisLoading = (flag, immediately = false) => {
     if (loadingTimer) clearTimeout(loadingTimer)
     startTime = new Date().getTime()
     Vue.$vux.loading.show()
-  } else {
+  } else if (loadingInstance) {
     if (immediately) {
       if (loadingTimer) clearTimeout(loadingTimer)
       Vue.$vux.loading.hide()
@@ -79,6 +79,12 @@ export const request = (config = {}, options = {}) => {
     requestUrl = host + url
   } else {
     requestUrl = url
+  }
+  if (data.hasOwnProperty('wisLoading')) {
+    wisLoading(data.wisLoading)
+    delete data.wisLoading
+  } else {
+    wisLoading(true)
   }
   let requestOption = {
     url: requestUrl,
