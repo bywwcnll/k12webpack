@@ -80,7 +80,7 @@ export const request = (config = {}, options = {}) => {
   } else {
     requestUrl = url
   }
-  if (data.hasOwnProperty('wisLoading')) {
+  if (data && data.hasOwnProperty('wisLoading')) {
     wisLoading(data.wisLoading)
     delete data.wisLoading
   } else {
