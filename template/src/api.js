@@ -1,4 +1,1 @@
-// 例：
-
-// 登录
-// export const login = '/role/login'
+export const getCurrentUser = '/api/user/getCurrentUser'

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import urlencode from 'urlencode'
 
+let timeout = 30000
 let startTime = 0
 let loadingTimer = null
 let loadingDelay = 800
@@ -89,6 +90,7 @@ export const request = (config = {}, options = {}) => {
   let requestOption = {
     url: requestUrl,
     method: method,
+    timeout,
     ...options
   }
   if (new RegExp(/GET/ig).test(method)) {
